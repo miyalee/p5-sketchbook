@@ -5,6 +5,8 @@
 A drawing tool that will not let you keep a line. Drag across the canvas and flowers open
 along the path you traced — then, a few seconds later, they fade and the page is blank again.
 
+**▶ [Run it live](https://miyalee.github.io/p5-sketchbook/A1D_StrokeBlooming/)**
+
 ![Stroke Blooming](media/version1.png)
 
 ## Concept
@@ -13,15 +15,14 @@ You draw a stroke; the stroke blooms; the bloom dies. Nothing you make here surv
 turns drawing into something closer to gardening than to mark-making — you tend a thing for
 three seconds and then it goes.
 
-The line is never actually rendered. What you see is the *residue* of your gesture: flowers
-dropped every 40 px along the path, each one running its own open–hold–fade lifecycle from
-the moment it was planted. Draw slowly and you get a dense hedge; draw fast and you get a
-sparse trail.
-
 ## Inspiration
 
-Inspired by **Living Line 1** and **Reordering Rectangles** — both pieces where a mark has
-its own behaviour after you make it, rather than sitting still where you put it.
+From the Chinese idiom **妙笔生花** (*miào bǐ shēng huā*) — literally "a wondrous brush
+grows flowers", said of writing or painting so good that it seems to bloom on the page.
+This sketch takes the idiom at its word: the brush really does grow flowers.
+
+Also built on **Living Line 1** and **Reordering Rectangles** — both pieces where a mark
+has its own behaviour after you make it, rather than sitting still where you put it.
 
 ## How it works
 
@@ -55,16 +56,12 @@ notched petal tip cleanly.
 
 Switch with the `flowerVersion` variable at the top of `sketch.js` (`1` or `2`).
 
-## Demo
-
-▶ [`media/demo.mp4`](media/demo.mp4) — drawing, blooming, fading (38 s)
-
 ## Run it
 
-Open `index.html` in a browser, or serve the folder:
+Serve the repo from its root, then pick this project:
 
 ```bash
-python3 -m http.server 8000
+npx http-server -p 8000
 ```
 
 Click for a single flower, or hold and drag for a trail.

@@ -2,8 +2,11 @@
 
 **A1B** · Interactive Media, UTS · 22 August – 3 September 2026
 
-A large diamond built from nineteen rows of small diamonds. Click anywhere and a ring of
-light sweeps outward from your cursor, bleaching each tile white as the wave front crosses it.
+A large diamond built from nineteen rows of small diamonds. Click anywhere and light ripples
+out through the tiles, each one flashing as the wave reaches it — the whole stone catching
+the light for a moment, the way a cut gem does when it turns.
+
+**▶ [Run it live](https://miyalee.github.io/p5-sketchbook/A1B_Diamond/)**
 
 ![Diamond](media/version1.png)
 
@@ -20,7 +23,9 @@ settles back exactly as it was.
 
 ## Inspiration
 
-> _To fill in — there is no inspiration note in `sketch.js` for this one._
+Precious stones, and the particular kind of opulence they carry — a cut gem under a
+spotlight, throwing light back at you in bursts as it turns. I wanted the sketch to have
+that glitter: not a smooth animation, but a surface that catches and flashes.
 
 ## How it works
 
@@ -62,16 +67,12 @@ one commented out.
 
 An early paper study is in [`media/scratch.png`](media/scratch.png).
 
-## Demo
-
-▶ [`media/demo.mp4`](media/demo.mp4) — clicking around the tower, ripples overlapping (24 s)
-
 ## Run it
 
-Open `index.html` in a browser, or serve the folder:
+Serve the repo from its root, then pick this project:
 
 ```bash
-python3 -m http.server 8000
+npx http-server -p 8000
 ```
 
 ## Built with

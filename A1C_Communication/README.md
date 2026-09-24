@@ -5,6 +5,8 @@
 A phone with no keyboard. Tap the left half of the screen and someone says something; tap
 the right half and you answer. Neither of you chooses the words.
 
+**▶ [Run it live](https://miyalee.github.io/p5-sketchbook/A1C_Communication/)**
+
 ![Communication](media/version2.png)
 
 ## Concept
@@ -12,10 +14,6 @@ the right half and you answer. Neither of you chooses the words.
 A messaging thread stripped down to its two real inputs: *which side is speaking*, and
 *something got sent*. The content is drawn at random from a list of faces, so the
 conversation has rhythm, turn-taking and tone — but no meaning you control.
-
-What's left is the shape of a conversation. Two people volleying expressions back and
-forth, the thread scrolling up, the phone filling with something that looks like intimacy
-and is actually noise.
 
 Two behaviours drive the piece, and they map onto the brief:
 
@@ -26,7 +24,9 @@ Two behaviours drive the piece, and they map onto the brief:
 
 ## Inspiration
 
-> _To fill in — there is no inspiration note in `sketch.js` for this one._
+The easy, happy chats with friends that do not need to mean anything — the ones where you
+are mostly sending faces back and forth, nobody is trying to make a point, and the whole
+thing is warm precisely because it is light. The words were never carrying the message.
 
 ## How it works
 
@@ -52,16 +52,12 @@ Both message sets live in `js/messages.js` as `KAOMOJI_TEXTS` and `EMOJI_TEXTS`.
 toggling the two `messages.push(...)` lines in `sketch.js` (around line 71) — version 2 is
 the one currently active.
 
-## Demo
-
-▶ [`media/demo.mp4`](media/demo.mp4) — tapping both sides, thread scrolling (45 s)
-
 ## Run it
 
-Open `index.html` in a browser, or serve the folder:
+Serve the repo from its root, then pick this project:
 
 ```bash
-python3 -m http.server 8000
+npx http-server -p 8000
 ```
 
 ## Built with

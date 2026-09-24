@@ -6,10 +6,8 @@ builds a small world that responds to only that.
 
 ### ▶ [Run them live — miyalee.github.io/p5-sketchbook](https://miyalee.github.io/p5-sketchbook/)
 
-No clone, no install. Every title below links straight to the running sketch.
-
-Each folder also has its own README with the concept, the inspiration, how the code works,
-and a demo recording.
+No clone, no install. Every title below opens the running sketch; each **source** link goes
+to that project's folder and its README — concept, inspiration, and how the code works.
 
 ---
 
@@ -17,29 +15,25 @@ and a demo recording.
 
 | | |
 | --- | --- |
-| <img src="A1A_WindowView/media/version1.png" width="380"> | ### [A1A — Window View](A1A_WindowView/)<br>**6–21 Aug 2026** · *reload*<br><br>A pale sky seen through a window frame, drawn only from lines and ellipses. `noLoop()` freezes it after one pass, so the variation lives in the reload — every refresh scatters a new sky. |
-| <img src="A1B_Diamond/media/version1.png" width="380"> | ### [A1B — Diamond](A1B_Diamond/)<br>**22 Aug – 3 Sep 2026** · *click*<br><br>Nineteen rows of small diamonds resolve into one large diamond. Click and a ring of light sweeps outward from the cursor, bleaching each tile white as it passes, then leaves the surface exactly as it was. |
-| <img src="A1C_Communication/media/version2.png" width="380"> | ### [A1C — Communication](A1C_Communication/)<br>**2–4 Sep 2026** · *tap left / tap right*<br><br>A phone with no keyboard. Tap the left half and someone speaks; tap the right half and you answer. The words are drawn at random — what's left is the shape of a conversation without its content. |
-| <img src="A1D_StrokeBlooming/media/version1.png" width="380"> | ### [A1D — Stroke Blooming](A1D_StrokeBlooming/)<br>**6–11 Sep 2026** · *drag*<br><br>A drawing tool that won't let you keep a line. Flowers open along the path you trace, hold for three seconds, then fade. The stroke is never rendered — only its residue. |
-| <img src="A1E_CatsInTheDark/media/version2.png" width="380"> | ### [A1E — Cats in the Dark](A1E_CatsInTheDark/)<br>**15–18 Sep 2026** · *microphone*<br><br>Twenty cats asleep in a dark room. Speak and their eyes open one by one. Duration wakes them, not volume — the room responds to sustained presence rather than to a shout. |
+| <img src="A1A_WindowView/media/version1.png" width="380"> | ### [A1A — Window View](https://miyalee.github.io/p5-sketchbook/A1A_WindowView/)<br>**6–21 Aug 2026** · *reload* · [source](A1A_WindowView/)<br><br>A pale sky seen through a window frame, drawn only from lines and ellipses. `noLoop()` freezes it after one pass, so the variation lives in the reload — every refresh scatters a new sky. |
+| <img src="A1B_Diamond/media/version1.png" width="380"> | ### [A1B — Diamond](https://miyalee.github.io/p5-sketchbook/A1B_Diamond/)<br>**22 Aug – 3 Sep 2026** · *click* · [source](A1B_Diamond/)<br><br>Nineteen rows of small diamonds resolve into one large diamond. Click and light ripples out through the tiles, each flashing as the wave reaches it — the whole stone catching the light the way a cut gem does when it turns. |
+| <img src="A1C_Communication/media/version2.png" width="380"> | ### [A1C — Communication](https://miyalee.github.io/p5-sketchbook/A1C_Communication/)<br>**2–4 Sep 2026** · *tap left / tap right* · [source](A1C_Communication/)<br><br>A phone with no keyboard. Tap the left half and someone speaks; tap the right half and you answer. Neither of you chooses the words — it is the easy back-and-forth of a chat that never needed to mean anything. |
+| <img src="A1D_StrokeBlooming/media/version1.png" width="380"> | ### [A1D — Stroke Blooming](https://miyalee.github.io/p5-sketchbook/A1D_StrokeBlooming/)<br>**6–11 Sep 2026** · *drag* · [source](A1D_StrokeBlooming/)<br><br>A drawing tool that won't let you keep a line. Flowers open along the path you trace, hold for three seconds, then fade — the Chinese idiom 妙笔生花, "a wondrous brush grows flowers", taken at its word. |
+| <img src="A1E_CatsInTheDark/media/version2.png" width="380"> | ### [A1E — Cats in the Dark](https://miyalee.github.io/p5-sketchbook/A1E_CatsInTheDark/)<br>**15–18 Sep 2026** · *microphone* · [source](A1E_CatsInTheDark/)<br><br>Twenty cats asleep in a dark room. Speak and their eyes open one by one, like little lasers coming on across the floor. Duration wakes them, not volume — the room responds to sustained presence, not to a shout. |
 
 ---
 
 ## Running them
 
-The easiest way is the [live site](https://miyalee.github.io/p5-sketchbook/) — it serves over
-HTTPS, which **A1E requires**: `getUserMedia` will not hand over the microphone to a page
-opened from a `file://` URL, so the cats never wake up if you just double-click the file.
+Easiest is the [live site](https://miyalee.github.io/p5-sketchbook/) — nothing to install.
 
-Locally, most sketches open straight from the filesystem. For A1E, serve the folder:
+To run locally, serve the repo from its root:
 
 ```bash
-cd A1E_CatsInTheDark
-python3 -m http.server 8000
-# then open http://localhost:8000 and allow microphone access
+npx http-server -p 8000
 ```
 
-The same command works for any of the others if you'd rather serve them all.
+Then open <http://localhost:8000> and pick a project.
 
 ## Built with
 

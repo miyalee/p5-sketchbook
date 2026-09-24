@@ -5,6 +5,9 @@
 Twenty cats asleep in a dark room. Speak, and one by one their eyes open. Stop, and one by
 one they go back to sleep.
 
+**▶ [Run it live](https://miyalee.github.io/p5-sketchbook/A1E_CatsInTheDark/)** — needs
+microphone access.
+
 ![Cats in the Dark](media/version2.png)
 
 ## Concept
@@ -20,7 +23,11 @@ being noticed by something.
 
 ## Inspiration
 
-Inspired by the **Audio-Sensitive Animation** example from class.
+A short video of a roomful of cats woken all at once in the dark — the shock of it was all
+those eyes catching the light at the same moment, like little lasers coming on across the
+floor. That image is the whole piece.
+
+Built on the **Audio-Sensitive Animation** example from class.
 
 ## How it works
 
@@ -47,17 +54,6 @@ straight to the Web Audio API: `getUserMedia` → `AnalyserNode` (`fftSize` 1024
 the time-domain samples in `micLevel()`. A **Listening / Stopped** button in the top-right
 lets you release the mic.
 
-## ⚠️ Cat placement — read before editing `CAT_SPOTS`
-
-The cats are sorted by `x` and drawn left to right, so **each cat overlaps the one to its
-left.** The sprite puts the head in the top-left corner, which means a right-hand neighbour
-only ever covers its neighbour's *tail* — never its face.
-
-Break that relationship by moving coordinates around and you get cats with half an eye
-occluded. It is very hard to spot by eye; it was originally found by scripting a
-pixel-mask check over every overlapping pair. If you change `CAT_SPOTS`, verify the eyes
-are still clear.
-
 ## Versions
 
 | Version 1 — asleep | Version 2 — woken |
@@ -65,30 +61,17 @@ are still clear.
 | ![Version 1](media/version1.png) | ![Version 2](media/version2.png) |
 | The resting state. `awakeRate` at 0, the room silent. | Mid-wake, roughly half the room. Yellow eye reflections are the only light in the scene. |
 
-## Design evolution
-
-The piece went through several passes before landing here:
-
-1. Cats drawn in code, three states (asleep / head up / startled), green glowing eyes.
-2. Hand-drawn code cats replaced with pixel sprites — the drawn ones looked wrong.
-3. Tried four-frame sprite animation; it read as jittery, reverted to two static sprites.
-4. Added tabby cats for variety; their lighter fur pulled focus in the dark scene, so they
-   were cut. Black cats only.
-5. Three states simplified down to two — asleep and awake.
-
-## Demo
-
-▶ [`media/demo.mp4`](media/demo.mp4) — speaking, the room waking, then settling (8 s, with sound)
-
 ## Run it
 
-**Must be served over HTTP** — `getUserMedia` will not run from a `file://` URL:
+Serve the repo from its root, then pick this project:
 
 ```bash
-python3 -m http.server 8000
+npx http-server -p 8000
 ```
 
-Then open `http://localhost:8000` and allow microphone access.
+It must be served, not opened as a file — `getUserMedia` will not hand over the microphone
+to a `file://` page, so the cats never wake up. `http://localhost` counts as a secure
+context, so the command above is enough.
 
 ## Built with
 

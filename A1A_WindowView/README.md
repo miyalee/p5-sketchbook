@@ -5,6 +5,8 @@
 A pale sky seen through a window frame. Every reload reshuffles the clouds, so the same
 sketch never draws the same sky twice.
 
+**▶ [Run it live](https://miyalee.github.io/p5-sketchbook/A1A_WindowView/)**
+
 ![Window View](media/version1.png)
 
 ## Concept
@@ -16,10 +18,6 @@ layers, so the pale ones read as distant and the bright ones as near.
 
 The sketch calls `noLoop()` after one pass: it is a generative still, not an animation.
 The variation lives in the reload, not in time.
-
-## Inspiration
-
-> _To fill in — there is no inspiration note in `sketch.js` for this one._
 
 ## How it works
 
@@ -43,16 +41,12 @@ Two variants, made by changing the number of frame lines and the cloud palette.
 To switch, change the argument to `drawFrames()` in `draw()` and the three colours passed
 to `randomClouds()`.
 
-## Demo
-
-No screen recording for this piece — it is a static sketch, so the stills above are the work.
-
 ## Run it
 
-Open `index.html` in a browser, or serve the folder:
+Serve the repo from its root, then pick this project:
 
 ```bash
-python3 -m http.server 8000
+npx http-server -p 8000
 ```
 
 ## Built with
