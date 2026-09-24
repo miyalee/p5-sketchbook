@@ -6,17 +6,31 @@ const CONFIG = {
     diamondWidth: 32,
     diamondHeight: 58,
     topColor: "#ececec",
-    bottomColor: "#be2d69",
-    // bottomColor: "#2457B8",
+    version1Color: "#be2d69", // red
+    version2Color: "#2457B8", // blue
 };
+
+let version = 1;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     background(255);
 
+    buildTower();
+
+    const hint = createP("Press 1 or 2 to switch version");
+    hint.class("hint");
+}
+
+// Rebuild the tower in the current version's colour
+function buildTower() {
+    const bottomColor = version === 1 ? CONFIG.version1Color : CONFIG.version2Color;
+
+    diamonds = [];
+
     createTower(
         color(CONFIG.topColor),
-        color(CONFIG.bottomColor),
+        color(bottomColor),
         CONFIG.diamondWidth,
         CONFIG.diamondHeight,
         CONFIG.layers,
@@ -44,6 +58,15 @@ function draw() {
 function mousePressed() {
     // Start the wave where the user clicked
     ripples.push(new Ripple(mouseX, mouseY));
+}
+
+function keyPressed() {
+    if (key !== "1" && key !== "2") {
+        return;
+    }
+
+    version = Number(key);
+    buildTower();
 }
 
 // Create a tower of diamonds

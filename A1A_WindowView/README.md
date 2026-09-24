@@ -17,7 +17,7 @@ turns the sky into a set of panes. Clouds are scattered at random positions in t
 layers, so the pale ones read as distant and the bright ones as near.
 
 The sketch calls `noLoop()` after one pass: it is a generative still, not an animation.
-The variation lives in the reload, not in time.
+The variation lives in the reload and in the keypress, not in time.
 
 ## How it works
 
@@ -28,18 +28,19 @@ The variation lives in the reload, not in time.
   ellipses sitting on top of it. Called three times with three different colours so the
   clouds stack into depth layers.
 - **`noLoop()`** — freezes the frame once drawn.
+- **`keyPressed()`** — `1` and `2` set `version`, then call `redraw()` by hand, since
+  `noLoop()` means no further frames come on their own.
 
 ## Versions
 
-Two variants, made by changing the number of frame lines and the cloud palette.
+Two variants, differing in the number of frame lines and the cloud palette. **Press `1` or
+`2`** to switch — and since the clouds are placed at random on every pass, each press also
+gives you a fresh sky.
 
 | Version 1 — starburst frame, warm sky | Version 2 — cross frame, cool sky |
 | --- | --- |
 | ![Version 1](media/version1.png) | ![Version 2](media/version2.png) |
-| Eight radiating lines; clouds in white, blush and pale yellow. | A simple cross splitting the sky into four panes; clouds in white, blush and pale blue. |
-
-To switch, change the argument to `drawFrames()` in `draw()` and the three colours passed
-to `randomClouds()`.
+| Eight radiating lines; clouds in white, blush and pale yellow. | A simple cross splitting the sky into four panes; clouds in white, pale blue and lilac. |
 
 ## Run it
 

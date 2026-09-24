@@ -1,20 +1,40 @@
+let version = 1;
+
 function setup() {
     createCanvas(800, 600);
+
+    const hint = createP("Press 1 or 2 to switch version");
+    hint.class("hint");
 }
 
 function draw() {
     // Sky color
     background("#c8e5f0");
 
-    // Draw clouds
-    randomClouds(10, "#fff");
-    randomClouds(5, "#f9f1f1");
-    randomClouds(5, "#FFF5B4");
-
-    // Draw window's frame
-    drawFrames(8);
+    if (version === 1) {
+        // Draw clouds
+        randomClouds(10, "#fff");
+        randomClouds(5, "#f9f1f1");
+        randomClouds(5, "#FFF5B4");
+        // Draw window's frame
+        drawFrames(8);
+    } else {
+        randomClouds(10, "#fff");
+        randomClouds(5, "#f1f6f9");
+        randomClouds(5, "#f7d4ff");
+        drawFrames(4);
+    }
 
     noLoop();
+}
+
+function keyPressed() {
+    if (key !== "1" && key !== "2") {
+        return;
+    }
+
+    version = Number(key);
+    redraw(); // draw() ends with noLoop(), so ask for the one frame by hand
 }
 
 // numSectors: number of frames to draw

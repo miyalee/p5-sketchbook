@@ -11,3 +11,14 @@ body {
     min-height: 100vh;
     background: #f0f0f0;
 }
+
+/* Sits over the canvas, which already fills the window */
+.hint {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #8a9298;
+    font: 14px system-ui, sans-serif;
+    pointer-events: none; /* clicks belong to the canvas */
+}
