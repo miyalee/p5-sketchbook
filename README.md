@@ -4,8 +4,12 @@ Five p5.js sketches made for **Interactive Media** at **UTS**, August–Septembe
 Each one takes a single interaction — a reload, a click, a tap, a drag, a voice — and
 builds a small world that responds to only that.
 
-Every project is self-contained: open its `index.html` and it runs. Each folder has its own
-README with the concept, the inspiration, how the code works, and a demo recording.
+### ▶ [Run them live — miyalee.github.io/p5-sketchbook](https://miyalee.github.io/p5-sketchbook/)
+
+No clone, no install. Every title below links straight to the running sketch.
+
+Each folder also has its own README with the concept, the inspiration, how the code works,
+and a demo recording.
 
 ---
 
@@ -23,9 +27,11 @@ README with the concept, the inspiration, how the code works, and a demo recordi
 
 ## Running them
 
-Most sketches open straight from the filesystem — double-click `index.html`.
+The easiest way is the [live site](https://miyalee.github.io/p5-sketchbook/) — it serves over
+HTTPS, which **A1E requires**: `getUserMedia` will not hand over the microphone to a page
+opened from a `file://` URL, so the cats never wake up if you just double-click the file.
 
-**A1E needs a local server**, because `getUserMedia` refuses to run from a `file://` URL:
+Locally, most sketches open straight from the filesystem. For A1E, serve the folder:
 
 ```bash
 cd A1E_CatsInTheDark

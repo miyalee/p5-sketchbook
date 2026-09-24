@@ -14,7 +14,7 @@ let phoneBounds;
 let chatBounds;
 let inputBounds;
 
-const PHONE_WIDTH = 250;
+const PHONE_WIDTH = 350;
 const PHONE_HEIGHT = 680;
 
 const COLORS = {

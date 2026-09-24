@@ -67,4 +67,4 @@ python3 -m http.server 8000
 ## Built with
 
 p5.js 2.x (`js/p5.min.js`), plain HTML/CSS. Canvas fills the window; the phone is a fixed
-250 × 680 centred inside it.
+350 × 680 centred inside it.
