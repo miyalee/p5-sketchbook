@@ -36,6 +36,8 @@ thing is warm precisely because it is light. The words were never carrying the m
 - **`mousePressed()`** checks the click against the chat area, works out `side` from
   whether the x position falls left or right of the phone's midline, then pushes
   `{ side, text, fontsize }` onto the `messages` array.
+- **`keyPressed()`** — `1` and `2` set `version` and clear `messages`, so each version
+  starts from an empty chat.
 - **Drawing** walks `messages` from the bottom of the chat area upward, so new messages
   push older ones off the top of the screen the way a real thread does.
 - The phone frame, notch, bubbles with their tails, and the send button are all drawn as
@@ -43,14 +45,15 @@ thing is warm precisely because it is light. The words were never carrying the m
 
 ## Versions
 
+Two variants, differing in the message set and the font size. **Press `1` or `2`** to
+switch — the chat is cleared on each switch.
+
 | Version 1 — kaomoji | Version 2 — emoji |
 | --- | --- |
 | ![Version 1](media/version1.png) | ![Version 2](media/version2.png) |
 | `(≧▽≦)` `(╯°□°）╯︵ ┻━┻` — text-built faces at 14 px. Reads as older internet, more effortful, more personal. | Unicode emoji at 22 px. Reads as current, flatter, more disposable. |
 
-Both message sets live in `js/messages.js` as `KAOMOJI_TEXTS` and `EMOJI_TEXTS`. Switch by
-toggling the two `messages.push(...)` lines in `sketch.js` (around line 71) — version 2 is
-the one currently active.
+Both message sets live in `js/messages.js` as `KAOMOJI_TEXTS` and `EMOJI_TEXTS`.
 
 ## Run it
 

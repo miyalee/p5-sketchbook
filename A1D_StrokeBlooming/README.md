@@ -43,19 +43,22 @@ Opening is eased with `1 - pow(1 - open, 3)` — slow to start, quick to finish 
 cherry blossom also rotates a quarter turn as it opens, so the bloom unfurls rather than
 just scaling up. Dead flowers are spliced out of the array on a backwards loop.
 
+**Switching.** `keyPressed()` sets `flowerVersion` from the `1` / `2` key, and
+`createFlower()` reads it to pick `Flower` or `FlowerV2` for each new flower.
+
 **Petals.** The blossom petal is a seven-segment bezier path drawn straight onto
 `drawingContext` with a linear gradient fill, because p5's `bezierVertex` could not give the
 notched petal tip cleanly.
 
 ## Versions
 
+Two flower types. **Press `1` or `2`** to switch — flowers already on the canvas keep
+their type and fade out as usual, so you can draw a stroke that changes species halfway.
+
 | Version 1 — cherry blossom | Version 2 — blue daisy |
 | --- | --- |
 | ![Version 1](media/version1.png) | ![Version 2](media/version2.png) |
 | Five bezier petals, white-to-`#f2a6a6` gradient, rotates as it opens. | Ten flat `#5bb7ba` ellipse petals around a `#ffc329` centre. Subclasses `Flower` and overrides `display()` only. |
-
-Switch with the `flowerVersion` variable at the top of `sketch.js` (`1` or `2`).
-
 ## Run it
 
 Serve the repo from its root, then pick this project:

@@ -13,9 +13,10 @@ let messages = []; // Structure: { side: 'left' | 'right', text: string, fontsiz
 let phoneBounds;
 let chatBounds;
 let inputBounds;
+let version = 1;
 
 const PHONE_WIDTH = 350;
-const PHONE_HEIGHT = 680;
+const PHONE_HEIGHT = 650;
 
 const COLORS = {
     page: "#FFFFFF",
@@ -33,6 +34,9 @@ function setup() {
 
     noStroke();
     textFont("Arial");
+
+    const hint = createP("Press 1 or 2 to switch version");
+    hint.class("hint");
 }
 
 function setupPhoneLayout() {
@@ -64,12 +68,26 @@ function draw() {
 }
 
 function mousePressed() {
-    if (!isInsidePhone()) return;
+    if (!isInsidePhone()) {
+        return;
+    }
 
     const side = mouseX < phoneBounds.x + phoneBounds.w / 2 ? "left" : "right";
 
-    // messages.push({ side, text: random(KAOMOJI_TEXTS), fontsize: 14 }); // Version1
-    messages.push({ side, text: random(EMOJI_TEXTS), fontsize: 22 }); // Version2
+    if (version === 1) {
+        messages.push({ side, text: random(KAOMOJI_TEXTS), fontsize: 14 });
+    } else {
+        messages.push({ side, text: random(EMOJI_TEXTS), fontsize: 22 });
+    }
+}
+
+function keyPressed() {
+    if (key !== "1" && key !== "2") {
+        return;
+    }
+
+    version = Number(key);
+    messages = []; // Start a fresh chat so kaomoji and emoji don't mix
 }
 
 function isInsidePhone() {

@@ -11,6 +11,10 @@ const SLEEP_SPEED = 0.005; // How fast cats fall back asleep, same as wake speed
 const ASLEEP_FILE = "assets/cat-sleep.png";
 const AWAKE_FILE = "assets/cat-open-eyes.png";
 
+// The cat area, CAT_SPOTS are positions inside it
+const AREA_W = 800;
+const AREA_H = 600;
+
 const CAT_SPOTS = [
     // first row
     [80, 216],
@@ -79,6 +83,7 @@ function draw() {
     background("#1E222C");
 
     push();
+    translate((width - AREA_W) / 2, (height - AREA_H) / 2); // Move the cat area to the centre of the screen
     for (const cat of cats) {
         drawCat(cat);
     }

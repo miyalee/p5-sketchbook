@@ -42,6 +42,9 @@ highest answer, and lerps its own colour that far toward white.
 That split matters: the ripple never touches the diamonds, and the diamonds never store
 state. Ripples are deleted once they expire, and the tower is unchanged.
 
+**Switching versions** — `keyPressed()` sets `version` from the `1` / `2` key and calls
+`buildTower()`, which empties `diamonds` and rebuilds the tower in that version's colour.
+
 ## Configuration
 
 Everything tunable sits in one `CONFIG` object at the top of `sketch.js`:
@@ -51,19 +54,19 @@ Everything tunable sits in one `CONFIG` object at the top of `sketch.js`:
 | `layers` | `10` | Rows before mirroring — 10 layers gives 19 rows |
 | `diamondWidth` / `diamondHeight` | `32` / `58` | Tile proportions |
 | `topColor` | `#ececec` | Colour at the two tips |
-| `bottomColor` | `#be2d69` | Colour at the widest row |
+| `version1Color` / `version2Color` | `#be2d69` / `#2457B8` | Colour at the widest row, per version |
 
 Ripple behaviour lives in the `Ripple` constructor: `speed` 8 px/frame, `width` 40 px,
 `framesDuration` 120 frames (≈2 s).
 
 ## Versions
 
+Two variants, differing only in the colour at the widest row. **Press `1` or `2`** to
+switch.
+
 | Version 1 — `#be2d69` | Version 2 — `#2457B8` |
 | --- | --- |
 | ![Version 1](media/version1.png) | ![Version 2](media/version2.png) |
-
-Swap by changing `CONFIG.bottomColor`. Both variants are kept in `sketch.js`, the unused
-one commented out.
 
 An early paper study is in [`media/scratch.png`](media/scratch.png).
 

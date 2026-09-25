@@ -19,6 +19,9 @@ let flowerVersion = 1; // 1 = Cherry blossom, 2 = Blue sun flower
 function setup() {
     createCanvas(windowWidth, windowHeight);
     noStroke();
+
+    const hint = createP("Press 1 or 2 to switch version");
+    hint.class("hint");
 }
 
 function draw() {
@@ -52,6 +55,14 @@ function mousePressed() {
 function mouseReleased() {
     lastFlowerX = 0;
     lastFlowerY = 0;
+}
+
+function keyPressed() {
+    if (key !== "1" && key !== "2") {
+        return;
+    }
+
+    flowerVersion = Number(key);
 }
 
 function createFlower(x, y) {
