@@ -1,12 +1,9 @@
 # Interactive Media — A1 Sketch Series
 
-Five p5.js sketches made for **Interactive Media** at **UTS**, August–September 2026.
-Each one takes a single interaction — a reload, a click, a tap, a drag, a voice — and
-builds a small world that responds to only that.
+Six p5.js sketches made for **Interactive Media** at **UTS**, August–October 2026.
+Each one takes a single interaction: click, tap, drag, voice, etc.
 
 ### ▶ [Run them live — miyalee.github.io/p5-sketchbook](https://miyalee.github.io/p5-sketchbook/)
-
-No clone, no install. Every title below opens the running sketch.
 
 ---
 
@@ -19,6 +16,7 @@ No clone, no install. Every title below opens the running sketch.
 | <img src="A1C_Communication/media/version2.png" width="380"> | ### [A1C — Communication](https://miyalee.github.io/p5-sketchbook/A1C_Communication/)<br>**2–4 Sep 2026** · *tap left / tap right*<br><br>A phone with no keyboard. Tap the left half and someone speaks; tap the right half and you answer. Neither of you chooses the words — it is the easy back-and-forth of a chat that never needed to mean anything. |
 | <img src="A1D_StrokeBlooming/media/version1.png" width="380"> | ### [A1D — Stroke Blooming](https://miyalee.github.io/p5-sketchbook/A1D_StrokeBlooming/)<br>**6–11 Sep 2026** · *drag*<br><br>A drawing tool that won't let you keep a line. Flowers open along the path you trace, hold for three seconds, then fade — the Chinese idiom 妙笔生花, "a wondrous brush grows flowers", taken at its word. |
 | <img src="A1E_CatsInTheDark/media/version2.png" width="380"> | ### [A1E — Cats in the Dark](https://miyalee.github.io/p5-sketchbook/A1E_CatsInTheDark/)<br>**15–18 Sep 2026** · *microphone*<br><br>Twenty cats asleep in a dark room. Speak and their eyes open one by one, like little lasers coming on across the floor. Duration wakes them, not volume — the room responds to sustained presence, not to a shout. |
+| <img src="A1F_Tornado/media/version1.png" width="380"> | ### [A1F — Tornado](https://miyalee.github.io/p5-sketchbook/A1F_Tornado/)<br>**30 Sep – 3 Oct 2026** · *drag · panel*<br><br>A cartoon tornado in 3D, thirty stacked rings that spin, swell and sway, fading from earth brown at the tip to storm grey at the top. Drag to walk around it; a live panel reshapes the funnel, its colours and its spin while it runs. |
 
 ---
 
@@ -38,7 +36,8 @@ Then open <http://localhost:8000> and pick a project.
 
 [p5.js 2.x](https://p5js.org/), vendored into each project's `js/` folder so the sketches
 run offline with no install step. A1D drops to raw Canvas 2D for its petal gradients;
-A1E uses the Web Audio API directly, since p5.sound's microphone path is broken under p5 2.x.
+A1E uses the Web Audio API directly, since p5.sound's microphone path is broken under p5 2.x;
+A1F renders in WEBGL and adds [lil-gui](https://lil-gui.georgealways.com/) for its control panel.
 
 No build tools, no dependencies, no package manager.
 
@@ -55,4 +54,5 @@ A1X_ProjectName/
 └── README.md       concept, inspiration, how it works
 ```
 
-Each piece ships **two versions**, documented side by side in its README.
+A1A–A1E each ship **two versions**, documented side by side in their READMEs. A1F has a
+single version and a live control panel instead.
