@@ -19,12 +19,6 @@ together.
 The colour runs from earth brown at the tip to storm grey at the top, as if the funnel is
 pulling the ground up into the cloud.
 
-## Inspiration
-
-Two exercises from the book **Code as Creative Medium**: **Spiral**, for the rings turning
-around a shared axis, and **Circle Morphing**, for circles whose size keeps shifting. The
-tornado puts the two together — a stack of morphing circles, each one spinning.
-
 ## How it works
 
 **`setup()`** — builds thirty rings from the ground up. Each ring stores its height, a random
@@ -40,31 +34,26 @@ at the top. Neighbouring rings sample nearby noise values, so the outline stays 
 10 px at the top. The whole tornado also drifts up to 100 px across the ground.
 
 **Spin.** The spin follows a 20-second cycle: slow at 1 rad/s, ease up over 6 s, hold at
-2 rad/s for 5 s, ease back down. The easing is `(1 - cos(PI * amount)) / 2`. The angle is
-accumulated with `deltaTime`, so a speed change never jumps the rings. The tip spins twice as
+2 rad/s for 5 s, ease back down. The tip spins twice as
 fast as the top, which twists the column.
 
-**Tilt.** Rings tilt by `-10 * sin(PI * heightRatio)` degrees — flat at both ends, leaning
+**Tilt.** Rings tilt by `±10` degrees — flat at both ends, leaning
 most in the middle.
 
-**Look.** Rings are flat `torus()` shapes at 80% opacity with no lighting, so overlaps build
-up soft bands of colour. Half the streaks are 45% lighter than their ring and half are 25%
-darker, giving the hand-drawn swirl.
+**Look.** Rings are flat `torus()` shapes at 80% opacity with no lighting, so with some streaks. Half the streaks are 45% lighter than their ring and half are 25%
+darker.
 
 **Panel.** A [lil-gui](https://lil-gui.georgealways.com/) panel controls finesse, both
-colours, fast spin speed and duration, drift, and sway. Radius and colour are worked out in
-`draw()` rather than stored, so every slider takes effect immediately without rebuilding the
-rings. While a slider is being dragged, `orbitControl()` is paused so the camera stays put.
+colours, fast spin speed and duration, drift, and sway. 
 
 ## Views
 
-A1F has a single version. In place of a `1` / `2` switch it ships the live control panel,
+A1F provide a live control panel,
 so the variants are yours to make.
 
 | Side view | From above |
 | --- | --- |
 | ![Side view](media/version1.png) | ![From above](media/version2.png) |
-| The default angle. Brown tip, grey funnel, the column bending as each ring sways. | Dragged overhead. The rings stack into a whirlpool, with the brown tip at its centre. |
 
 ## Run it
 
