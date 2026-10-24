@@ -66,3 +66,6 @@ The photo is loaded from `assets/`, so opening `index.html` straight from disk w
 ## Built with
 
 p5.js 2.x (`js/p5.min.js`). Canvas fills the window.
+
+Portrait photo (`assets/photo.png`) from [Unsplash](https://unsplash.com), used under the
+[Unsplash License](https://unsplash.com/license).
