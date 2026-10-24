@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: #ffffff;
+}
+
+canvas {
+    display: block;
+}
+
+/* Sits over the canvas, bottom centre */
+.slider-box {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    color: #444;
+    font: 14px system-ui, sans-serif;
+}
+
+.slider-box span {
+    min-width: 90px;
+}
+
+.slider-box input {
+    width: 200px;
+}
