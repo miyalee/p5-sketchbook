@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>A2B</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="js/p5.min.js"></script>
+        <script src="js/lil-gui.umd.min.js"></script>
+    </head>
+    <body>
+        <aside class="element-palette" aria-label="Add elements to your planet">
+            <button class="element-tool" data-element="ice" aria-label="Drag an ice floe onto the planet">
+                <img id="ice-thumbnail" alt="Ice floe model" draggable="false" />
+            </button>
+            <button class="element-tool" data-element="tornado" aria-label="Drag a tornado onto the planet">
+                <img id="tornado-thumbnail" alt="Tornado model" draggable="false" />
+            </button>
+            <button class="element-tool" data-element="fish" aria-label="Drag a school of fish into the water">
+                <img id="fish-thumbnail" alt="Fish school model" draggable="false" />
+            </button>
+        </aside>
+        <div id="drag-preview" hidden aria-hidden="true">
+            <img alt="" draggable="false" />
+            <span>Drop on the planet</span>
+        </div>
+        <p id="interaction-hint" role="status" aria-live="polite">Drag the planet to orbit · Scroll to zoom</p>
+        <!-- The parts, then sketch.js with setup() and draw(). water.js comes before tornado.js, which uses its colours -->
+        <script src="src/settings.js"></script>
+        <script src="src/space.js"></script>
+        <script src="src/water.js"></script>
+        <script src="src/tornado.js"></script>
+        <script src="src/ice.js"></script>
+        <script src="src/fish.js"></script>
+        <script src="src/elements.js"></script>
+        <script src="src/interaction.js"></script>
+        <script src="src/palette.js"></script>
+        <script src="src/sounds.js"></script>
+        <script src="sketch.js"></script>
+    </body>
+</html>

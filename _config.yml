@@ -1,0 +1,4 @@
+# Folders kept off the live site while they are still being made. They stay in the repo, only GitHub Pages skips them.
+# Remove a line to publish that work.
+exclude:
+  - A2B_WaterPlanet
