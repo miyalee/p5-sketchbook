@@ -3,11 +3,11 @@
 // Live settings, changed in the panel
 const params = {
     noiseScale: 0.006, // Size of the water bumps, noise units per world unit, bigger = smaller bumps
-    flowSpeed: 0.12, // How fast the water flows, noise units per second
+    flowSpeed: 0.06, // How fast the water flows, noise units per second
     coreRadius: 100, // Size of the core, world units
     finesse: 4, // How sharply the tornado funnel opens up towards the top, power
     iceThickness: 20, // Thickness of the ice, world units
-    fishColor: "#fbaf52", // Body colour of the fish, orange yellow
+    fishColor: "#ff8f05", // Body colour of the fish, orange yellow
     musicVolume: 0.5, // 0 to 1
     effectsVolume: 0.7, // 0 to 1
 

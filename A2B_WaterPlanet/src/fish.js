@@ -5,19 +5,15 @@
  */
 
 const FISH_SIZE = 51; // Length of one fish, nose to fin tips, world units. The rest of the fish is measured in fish lengths
-const FISH_BODY_ALPHA = 1; // Opacity of the body where it faces you, the edges are solid, 0 to 1
 const FISH_FIN_COLOR = "#3F8FE0"; // See-through blue, inside the fins
 const FISH_EDGE_COLOR = "#fcfeff"; // The glowing outline of the body and the fins
 const FISH_GLOW_COLOR = "#7ecdf7"; // Bright blue, the glow round the fin edges
 const FISH_TAIL_COLOR = "#FFFFFF"; // White at the body, fading to clear at the tip
 const FISH_TAIL_ALPHA = 0.6; // Opacity of the tail at the body, 0 to 1
-const FISH_ALPHA = 0.8; // Opacity inside the water, 0 to 1
-const FISH_GLOW = 0.6; // Strength of the layer over the water, glowing fins and the true body colour, 0 to 1
-const FISH_UNDERWATER = 0.3; // How much that layer looks seen through water, 0 = clear, 1 = sunk into the water
+const FISH_GLOW = 0.6; // Strength of the fish, drawn over the water so they glow through it, 0 to 1
+const FISH_UNDERWATER = 0.3; // How much they look seen through water, 0 = clear, 1 = sunk into the water
 const FISH_ORBIT = 0.4; // Where the schools swim, 0 = on the core, 1 = at the water surface
 const FISH_SPEED = 8; // Swimming speed round the core, world units per second
-const FISH_BOB = 6; // How far the school drifts up and down, world units
-const FISH_BOB_TIME = 18; // One slow drift up and down, seconds
 const FISH_WOBBLE = 0.12; // How far each fish drifts around its place in the school, fish lengths
 const FISH_WAG = 0.12; // How far the fin tips sway, fish lengths
 const FISH_WAG_SPEED = 2.2; // How fast the fins sway, radians per second
@@ -293,7 +289,7 @@ function makeFishShader() {
             float light = 0.8 + 0.3 * dot(inputs.normal, normalize(vec3(-0.3, -0.8, 0.5))); // Soft light from above
             inputs.color.rgb = mix(inputs.color.rgb * light, vec3(${edgeRGB.join(", ")}), edge);
             inputs.color.rgb = mix(inputs.color.rgb, uWaterColor, uUnderwater);
-            inputs.color.a = mix(inputs.color.a, 1.0, edge) * uOpacity;
+            inputs.color.a = uOpacity;
             return inputs;
         }`,
     });
@@ -364,15 +360,6 @@ function fishSchoolRadius(school) {
 }
 
 /**
- * How far the school has drifted up or down right now.
- * @param {Object} school - A school from makeFishSchool()
- * @returns {number} World units, + is south
- */
-function fishBob(school) {
-    return FISH_BOB * sin((school.time / FISH_BOB_TIME) * TWO_PI);
-}
-
-/**
  * Swims one school sideways round the core, once a frame. A school being dragged keeps still.
  * @param {Object} school - A school from makeFishSchool()
  */
@@ -392,20 +379,14 @@ function updateFishSchool(school) {
 }
 
 /**
- * Draws one school at its spot, drifting up and down.
+ * Draws one school at its spot. It is drawn over the near side of the water, which would hide it almost completely,
+ * and takes some of the water's colour instead.
  * @param {Object} school - A school from makeFishSchool()
- * @param {boolean} isGlow - false in the water, true for the glow over it
  */
-function drawFishSchool(school, isGlow) {
-    const bobSpeed = FISH_BOB * (TWO_PI / FISH_BOB_TIME) * cos((school.time / FISH_BOB_TIME) * TWO_PI);
-    const tilt = -atan2(bobSpeed, FISH_SPEED) * 0.5; // Noses tip up a little while drifting up, and down while drifting down
-
+function drawFishSchool(school) {
     push();
     moveToSpot(school.spot); // From here +x is the way they swim and +z is south
-    rotateX(-fishBob(school) / fishOrbitRadius()); // Drift north or south along the curve
-
-    // Over the water the fish take the water's colour, in the water the real water already colours them
-    drawFishGroup(school, isGlow, tilt, isGlow ? FISH_UNDERWATER : 0);
+    drawFishGroup(school, FISH_UNDERWATER);
     pop();
 }
 
@@ -413,20 +394,15 @@ function drawFishSchool(school, isGlow) {
  * Draws the fish of one school round the planet centre, each near its place in the school.
  * Also used for the palette picture.
  * @param {Object} school - A school from makeFishSchool()
- * @param {boolean} isGlow - false in the water, true for the glow over it
- * @param {number} tilt - How much the noses tip up or down, radians
  * @param {number} underwater - How much the fish look seen through water, 0 to 1: the bodies take the water's colour
  *     and the fins dim
  */
-function drawFishGroup(school, isGlow, tilt, underwater) {
-    const alpha = isGlow ? FISH_GLOW : FISH_ALPHA;
+function drawFishGroup(school, underwater) {
     const radius = fishOrbitRadius();
     const size = FISH_SIZE * school.scale; // World units per fish length
-    const bodyColor = color(params.fishColor);
     const finColor = lerpColor(color(255), color(DEEP_COLOR), underwater); // Multiplies the fin picture
 
-    bodyColor.setAlpha(255 * FISH_BODY_ALPHA);
-    finColor.setAlpha(255 * alpha * (1 - underwater)); // The fins add light, so they dim too, or they still glow on top
+    finColor.setAlpha(255 * FISH_GLOW * (1 - underwater)); // The fins add light, so under water they dim too
 
     // Moves to fish number i. Its place in the school is turned into angles round the planet centre,
     // so like the ice the school bends with the curve, and each fish faces along the curve where it is.
@@ -438,17 +414,16 @@ function drawFishGroup(school, isGlow, tilt, underwater) {
         rotateZ(((x + wobbleX) * size) / radius); // Forwards round the curve
         rotateX((-(z + wobbleZ) * size) / radius); // South round the curve
         translate(0, -radius - y * size, 0);
-        rotateY(tilt);
         scale(size);
         rotateX(HALF_PI); // Back towards the north, so the fish swims upright and shows its side to the outside
     };
 
     // Fins first, then the bodies over them, so the shader only changes twice.
     // The fins don't mark depth, or the see-through parts of their picture would hide what is behind them.
-    // Over the water the fins are added on as light, the bodies keep their own colour.
+    // The fins are added on as light, so they glow, the bodies keep their own colour.
     drawWithoutDepth(() => {
         push();
-        blendMode(isGlow ? ADD : BLEND);
+        blendMode(ADD);
         shader(finShader);
         texture(fishTexture);
         tint(finColor);
@@ -462,14 +437,14 @@ function drawFishGroup(school, isGlow, tilt, underwater) {
         pop();
     });
 
-    // The bodies mark depth, so only the side facing you is drawn
+    // The bodies mark depth. Both sides of each body are drawn, which shows as faint stripes
     push();
     blendMode(BLEND);
     shader(fishShader);
-    fishShader.setUniform("uOpacity", alpha);
+    fishShader.setUniform("uOpacity", FISH_GLOW);
     fishShader.setUniform("uWaterColor", toRGB(DEEP_COLOR));
     fishShader.setUniform("uUnderwater", underwater);
-    fill(bodyColor);
+    fill(params.fishColor);
     for (let i = 0; i < FISH_FORMATION.length; i++) {
         push();
         moveToFish(i);
@@ -487,7 +462,7 @@ function drawFishGroup(school, isGlow, tilt, underwater) {
  * @returns {number|null} Distance along the ray, or null if it misses
  */
 function pickFishSchool(ray, school) {
-    const centre = createVector(0, -fishOrbitRadius(), fishBob(school));
+    const centre = createVector(0, -fishOrbitRadius(), 0);
 
     return raySphereDistance(ray, centre, fishSchoolRadius(school));
 }
@@ -501,7 +476,6 @@ function drawFishOutline(school) {
     const radius = fishOrbitRadius();
     const ringSize = fishSchoolRadius(school) / radius; // Radians
 
-    rotateX(-fishBob(school) / radius);
     beginShape();
     for (let step = 0; step < 32; step++) {
         const angle = (step / 32) * TWO_PI;

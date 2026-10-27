@@ -12,7 +12,7 @@
 const VIEW_SIZE = 1300; // World units that fit across the shorter side of the window
 const DRAG_SPEED = 1; // Mouse drag sensitivity, multiplier, 1 = default
 const ZOOM_SPEED = 0.2; // Mouse wheel sensitivity, multiplier, 1 = default
-const PLANET_SPIN = 0.1; // Self-rotation speed, radians per second
+const PLANET_SPIN = 0.05; // Self-rotation speed, radians per second
 
 let sceneRenderer; // The WebGL canvas
 let planetAngle = 0; // How far the planet has spun round, radians
@@ -76,24 +76,19 @@ function draw() {
         drawIceFloe(floe);
     }
 
-    // Fish in the water, after everything they can swim behind, since they don't mark what they cover
-    for (const school of schoolList) {
-        drawFishSchool(school, false);
-    }
-
-    // Near side of the planet, over everything inside, marking no depth so the glow below can be drawn behind it
+    // Near side of the planet, over everything inside, marking no depth so the fish below can be drawn behind it
     drawWithoutDepth(() => {
         drawWater(planet, PLANET_RADIUS, "near");
     });
 
-    // A glowing copy of each school over the water, and the outline round the selected or hovered element
+    // The fish over the water, so they glow through it, and the outline round the selected or hovered element
     for (const school of schoolList) {
-        drawFishSchool(school, true);
+        drawFishSchool(school);
     }
     drawHighlight();
 
     // The near side of the planet again, marking depth without colour, so the splash is hidden behind the planet
-    // and under the waves. After the glow and the outline, which are inside the water and must stay seen.
+    // and under the waves. After the fish and the outline, which are inside the water and must stay seen.
     drawingContext.colorMask(false, false, false, false);
     drawWater(planet, PLANET_RADIUS, "near");
     drawingContext.colorMask(true, true, true, true);

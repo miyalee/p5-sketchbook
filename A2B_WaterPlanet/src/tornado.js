@@ -47,7 +47,7 @@ const CROWN_LAYERS = [
     { height: 0.2, reach: 0.6, colors: ["#FFFFFF", "#FFFFFF", "#FFFFFF"], alphas: [1, 0.9, 0.7] },
 ];
 
-const PICK_RINGS = 10; // Rings round the funnel that clicks are tested against, count
+const PICK_SLICES = 10; // Flat slices of the funnel that clicks are tested against, count
 
 let tornadoStrokes = []; // The strokes of wind every tornado is made of, see makeTornadoStrokes()
 let crownGeometry; // The crown of water round the bottom, its points moved every time it is drawn
@@ -339,42 +339,32 @@ function tornadoCentre(tornado, heightRatio) {
 }
 
 /**
- * How far along a ray it hits a tornado. Tests rings round the funnel, thick enough to fill the gaps between its
- * strokes, so all of it can be clicked but not the empty space beside it.
+ * How far along a ray it hits a tornado. The funnel is cut into flat slices up its height, each as wide as the funnel
+ * there, so all of it can be clicked but not the empty space beside it or above it.
  * @param {{origin: p5.Vector, direction: p5.Vector}} ray - In the tornado's space, see toSpotSpace()
  * @param {Object} tornado - A tornado from makeTornado()
  * @returns {number|null} Distance along the ray, or null if it misses
  */
 function pickTornado(ray, tornado) {
-    const tubeRadius = (TORNADO_HEIGHT / (PICK_RINGS - 1) / 2 + 2) * tornado.scale;
-    let closest = Infinity;
+    const sliceHeight = (TORNADO_HEIGHT / (PICK_SLICES - 1)) * tornado.scale;
+    let closest = null;
 
-    for (let i = 0; i < PICK_RINGS; i++) {
-        const heightRatio = i / (PICK_RINGS - 1);
+    for (let i = 0; i < PICK_SLICES; i++) {
+        const heightRatio = i / (PICK_SLICES - 1);
         const centre = tornadoCentre(tornado, heightRatio);
-        const radius = funnelRadius(heightRatio) * tornado.scale;
-        const bound = radius + tubeRadius;
-        let distance = raySphereDistance(ray, centre, bound);
+        const radius = (funnelRadius(heightRatio) + STROKE_WIDTH_TOP / 2) * tornado.scale;
 
-        if (distance === null || distance > closest) {
-            continue;
-        }
+        // Where the ray passes closest to the middle of the slice, and how far it is from there
+        const distance = p5.Vector.sub(centre, ray.origin).dot(ray.direction);
+        const offset = p5.Vector.add(ray.origin, p5.Vector.mult(ray.direction, distance)).sub(centre);
+        const isInSlice = abs(offset.y) < sliceHeight / 2 && Math.hypot(offset.x, offset.z) < radius;
 
-        // Step along the ray using the distance to the ring, a doughnut shape, until it touches
-        const limit = distance + bound * 2;
-        for (let step = 0; step < 48 && distance < limit && distance < closest; step++) {
-            const point = p5.Vector.add(ray.origin, p5.Vector.mult(ray.direction, distance)).sub(centre);
-            const gap = Math.hypot(Math.hypot(point.x, point.z) - radius, point.y) - tubeRadius;
-
-            if (gap < 0.7) {
-                closest = distance;
-                break;
-            }
-            distance += max(gap, 0.3);
+        if (isInSlice && distance > 0 && (closest === null || distance < closest)) {
+            closest = distance;
         }
     }
 
-    return closest === Infinity ? null : closest;
+    return closest;
 }
 
 /**

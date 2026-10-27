@@ -95,61 +95,6 @@ function raySphereDistance(ray, centre, radius) {
 }
 
 /**
- * How far along a ray it meets a triangle, the Möller–Trumbore test.
- * Written with plain numbers, since picking an ice floe tests every one of its triangles.
- * @param {{origin: p5.Vector, direction: p5.Vector}} ray - The direction has length 1
- * @param {p5.Vector} a - First corner
- * @param {p5.Vector} b - Second corner
- * @param {p5.Vector} c - Third corner
- * @returns {number|null} Distance along the ray, or null if it misses
- */
-function rayTriangleDistance(ray, a, b, c) {
-    const d = ray.direction;
-
-    // The two edges from corner a
-    const ex = b.x - a.x;
-    const ey = b.y - a.y;
-    const ez = b.z - a.z;
-    const fx = c.x - a.x;
-    const fy = c.y - a.y;
-    const fz = c.z - a.z;
-
-    // Near 0 when the ray runs along the triangle and can't hit it
-    const px = d.y * fz - d.z * fy;
-    const py = d.z * fx - d.x * fz;
-    const pz = d.x * fy - d.y * fx;
-    const determinant = ex * px + ey * py + ez * pz;
-
-    if (abs(determinant) < 0.000001) {
-        return null;
-    }
-
-    // How far the hit is towards corner b, 0 to 1 inside the triangle
-    const tx = ray.origin.x - a.x;
-    const ty = ray.origin.y - a.y;
-    const tz = ray.origin.z - a.z;
-    const u = (tx * px + ty * py + tz * pz) / determinant;
-
-    if (u < 0 || u > 1) {
-        return null;
-    }
-
-    // How far towards corner c, together with u at most 1 inside the triangle
-    const qx = ty * ez - tz * ey;
-    const qy = tz * ex - tx * ez;
-    const qz = tx * ey - ty * ex;
-    const v = (d.x * qx + d.y * qy + d.z * qz) / determinant;
-
-    if (v < 0 || u + v > 1) {
-        return null;
-    }
-
-    const distance = (fx * qx + fy * qy + fz * qz) / determinant;
-
-    return distance >= 0 ? distance : null;
-}
-
-/**
  * Where a ray meets a ball round the planet centre. If it passes beside the ball, the nearest point on its edge.
  * @param {{origin: p5.Vector, direction: p5.Vector}} ray - The direction has length 1
  * @param {number} radius - Radius of the ball, world units

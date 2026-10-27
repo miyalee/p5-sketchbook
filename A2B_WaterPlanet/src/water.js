@@ -10,7 +10,7 @@ const DETAIL_Y = 134; // Segments from pole to pole, count
 const DEEP_COLOR = "#3e96c9"; // Water blue, in the dips
 const SHALLOW_COLOR = "#6FD3F2"; // Aqua, in the middle
 const CREST_COLOR = "#cdf3fd"; // Foam white, on the peaks
-const PLANET_ALPHA = 0.91; // Opacity, 0 to 1
+const PLANET_ALPHA = 0.8; // Opacity, 0 to 1
 
 // Core, a smaller water ball inside, same bumps in deeper blues
 const CORE_DEEP_COLOR = "#062A55"; // Navy, in the dips
@@ -21,12 +21,12 @@ const CORE_DETAIL_X = 40; // Segments around the core, count
 const CORE_DETAIL_Y = 28; // Segments from pole to pole, count
 
 // Bumps and colours of both balls
-const BUMP_HEIGHT = 0.021; // How far the surface moves in and out, 0.021 = ±2.1% of the radius
-const BUMP_OCTAVES = 2; // Layers of noise in the bumps, few so the outline of the planet stays smooth
-const COLOR_OCTAVES = 3; // Layers of noise in the colour, more = finer detail, past 3 it looks like clouds
-const DEEP_NOISE = 0.19; // Noise at and below which the colour is the deep colour
-const CREST_NOISE = 0.93; // Noise at and above which the colour is the crest colour, higher = less foam
-const MIDDLE_LEVEL = 0.6; // Where the colour reaches the middle colour, 0 to 1, 0 = deepest dip, 1 = highest peak
+const BUMP_HEIGHT = 0.02; // How far the surface moves in and out, 0.021 = ±2.1% of the radius
+const BUMP_OCTAVES = 5; // Layers of noise in the bumps, few so the outline of the planet stays smooth
+const COLOR_OCTAVES = 9; // Layers of noise in the colour, more = finer detail, past 3 it looks like clouds
+const DEEP_NOISE = 0.2; // Noise at and below which the colour is the deep colour
+const CREST_NOISE = 1; // Noise at and above which the colour is the crest colour, higher = less foam
+const MIDDLE_LEVEL = 0.7; // Where the colour reaches the middle colour, 0 to 1, 0 = deepest dip, 1 = highest peak
 
 let planet; // Outer water ball
 let core; // Inner water ball

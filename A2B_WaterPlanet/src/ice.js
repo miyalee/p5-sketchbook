@@ -3,7 +3,7 @@
  * Each floe is built at the north pole on a flat map round it, see sphereVertex(), and moveToSpot() puts it in place.
  */
 
-const ICE_SIZE = 0.2; // Middle of a floe to a corner, radians, 0.2 covers about 0.8% of the planet surface
+const ICE_SIZE = 0.15; // Middle of a floe to a corner, radians, 0.2 covers about 0.8% of the planet surface
 const ICE_CORNERS_MIN = 7; // Number range of corners on each floe, count
 const ICE_CORNERS_MAX = 10; // Number range of corners on each floe, count
 const ICE_UNEVEN = 0.25; // How uneven the corners are, fraction of the ice size, 0.25 = ±25%
@@ -160,31 +160,38 @@ function drawIceFloe(floe) {
 }
 
 /**
- * How far along a ray it hits a floe, tested against every triangle of the floe after a quick test against a ball
- * round it.
+ * How far along a ray it hits a floe. Finds where the ray meets the top of the ice all round the planet, puts that
+ * point on the flat map round the north pole the floe is built on, and checks if it is inside the floe's outline.
  * @param {{origin: p5.Vector, direction: p5.Vector}} ray - In the floe's space, see toSpotSpace()
  * @param {Object} floe - A floe from makeIceFloe()
  * @returns {number|null} Distance along the ray, or null if it misses
  */
 function pickIceFloe(ray, floe) {
-    const bound = PLANET_RADIUS * ICE_SIZE * floe.scale * (1 + ICE_UNEVEN) + params.iceThickness;
+    const distance = raySphereDistance(ray, createVector(0, 0, 0), PLANET_RADIUS + params.iceThickness / 2);
 
-    if (raySphereDistance(ray, createVector(0, -PLANET_RADIUS, 0), bound) === null) {
+    if (distance === null) {
         return null;
     }
 
-    let closest = Infinity;
+    // The point on the map, the other way round from sphereVertex()
+    const hit = directionToSpot(p5.Vector.add(ray.origin, p5.Vector.mult(ray.direction, distance)).normalize());
+    const x = sin(hit.longitude) * hit.fromNorth;
+    const y = cos(hit.longitude) * hit.fromNorth;
+    const corners = floe.shape.map((corner) => p5.Vector.mult(corner, ICE_SIZE * floe.scale));
 
-    for (const face of floe.geometry.faces) {
-        const [a, b, c] = face.map((index) => floe.geometry.vertices[index]);
-        const distance = rayTriangleDistance(ray, a, b, c);
+    // Inside the outline if a line from the point out to the right crosses its edges an odd number of times
+    let isInside = false;
 
-        if (distance !== null && distance < closest) {
-            closest = distance;
+    for (let k = 0; k < corners.length; k++) {
+        const a = corners[k];
+        const b = corners[(k + 1) % corners.length];
+
+        if (a.y > y !== b.y > y && x < a.x + ((y - a.y) / (b.y - a.y)) * (b.x - a.x)) {
+            isInside = !isInside;
         }
     }
 
-    return closest === Infinity ? null : closest;
+    return isInside ? distance : null;
 }
 
 /**

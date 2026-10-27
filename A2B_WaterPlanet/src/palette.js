@@ -41,8 +41,11 @@ function makeThumbnails() {
     renderThumbnail("fish", FISH_SIZE * 1.9, () => {
         rotateX(-HALF_PI); // Side view
         translate(0, fishOrbitRadius(), 0); // The school to the middle
-        drawFishGroup(school, false, 0, 0);
-        drawFishGroup(school, true, 0, 0); // Clear, not coloured by water
+
+        // Twice: the first draw marks the bodies' depth, so the second covers only their near side, without stripes,
+        // and the fins add up to a clearer picture. Clear, not coloured by water.
+        drawFishGroup(school, 0);
+        drawFishGroup(school, 0);
     });
 }
 
