@@ -199,7 +199,7 @@ function makeCrownGeometry() {
 }
 
 /**
- * Draws one tornado standing on the water, at its average height like the ice. The waves rise and fall round it.
+ * Draws one tornado standing at the average water level, like the ice. The waves rise and fall round it.
  * @param {Object} tornado - A tornado from makeTornado()
  */
 function drawTornado(tornado) {

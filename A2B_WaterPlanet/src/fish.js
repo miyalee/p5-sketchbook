@@ -1,5 +1,5 @@
 /**
- * Fish schools: ten glowing see-through fish swimming slowly sideways round the core, after fish.png.
+ * Fish schools: ten glowing see-through fish swimming slowly sideways round the core.
  * Each fish is a 3D body plus a flat strip with a picture of its fins and tail on it. All fish share these meshes,
  * the picture and two shaders, the formation and the time make each one move its own way.
  */
@@ -79,7 +79,7 @@ function makeFishSchool(spot) {
 }
 
 /**
- * Draws the glowing see-through fins and tail of one fish facing right, after fish.png.
+ * Draws the glowing see-through fins and tail of one fish facing right.
  * The body is left out, the 3D body from makeFishBody() goes in its place.
  * Uses the canvas drawing commands directly, for the glow (shadowBlur) and the fading gradients.
  * @returns {p5.Image} 512 × 256, transparent round the fins
@@ -320,7 +320,7 @@ function makeFinStrip() {
 
 /**
  * Shader for the fin strip: the part by the body stays steady while a slow wave runs back through the fins.
- * Done on the graphics card, since bending every strip in JavaScript each frame was slow.
+ * Done on the graphics card, so the strips don't have to be bent again in JavaScript every frame.
  * @returns {p5.Shader} Set uBeat for each fish, where it is in its sway, radians
  */
 function makeFinShader() {

@@ -3,11 +3,11 @@
  * Each floe is built at the north pole on a flat map round it, see sphereVertex(), and moveToSpot() puts it in place.
  */
 
-const ICE_SIZE = 0.15; // Middle of a floe to a corner, radians, 0.2 covers about 0.8% of the planet surface
+const ICE_SIZE = 0.15; // Middle of a floe to a corner, radians, 0.15 = 51 world units on the planet surface
 const ICE_CORNERS_MIN = 7; // Number range of corners on each floe, count
 const ICE_CORNERS_MAX = 10; // Number range of corners on each floe, count
 const ICE_UNEVEN = 0.25; // How uneven the corners are, fraction of the ice size, 0.25 = ±25%
-const ICE_GRID_STEPS = 6; // Grids of the ice top, count per side
+const ICE_GRID_STEPS = 6; // Rings and steps each slice of the ice top is cut into, count
 const ICE_TOP_COLOR = "#F2FBFF"; // Snow white, in the middle
 const ICE_EDGE_COLOR = "#A8DDF2"; // Pale blue, at the edge
 const ICE_SIDE_COLOR = "#6DB8DE"; // Ice blue, on the sides

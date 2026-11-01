@@ -3,9 +3,9 @@
  * element out of it onto the planet.
  */
 
-const THUMBNAIL_WIDTH = 160; // Size of each picture, pixels, rendered at twice this for sharp screens
-const THUMBNAIL_HEIGHT = 125;
-const THUMBNAIL_ICE_SIZE = 0.25; // The floe in its picture, radians, separate from ICE_SIZE so the picture stays
+const THUMBNAIL_WIDTH = 160; // Width of each picture, pixels, rendered at twice this for sharp screens
+const THUMBNAIL_HEIGHT = 125; // Height of each picture, pixels
+const THUMBNAIL_ICE_SIZE = 0.25; // The floe in its picture, radians, apart from ICE_SIZE so the picture never changes
 const THUMBNAIL_ICE_THICKNESS = 15; // World units, separate from the Ice thickness slider for the same reason
 
 /**

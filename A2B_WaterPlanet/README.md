@@ -23,7 +23,7 @@ tornadoes stand on the waves inside a crown of splashing water, and the fish gli
 The *Generative Landscape* brief in *Code as Creative Medium* (Golan Levin and Tega Brain), and two of its
 examples: *Lonely Planets*, a small pastel world under a night sky, and *Fractional Noise Mountains*, terrain
 built from layers of noise. The colours come from ocean photos, the fish from a picture of glowing see-through
-fish, and the first tornadoes from my own [A1F Tornado](../A1F_Tornado/).
+fish, and the tornado idea from my own [A1F Tornado](../A1F_Tornado/).
 
 ## How it works
 
@@ -52,7 +52,7 @@ its edges.
 
 **`makeFishTexture()`** and **`makeFishBody()`** — the fins and tail are drawn once with canvas paths, gradients
 and a soft glow, with a hole in the shape of the body. A 3D body built from the same Bézier curves fills the hole,
-and a second shader waves the fins on the graphics card. The fish take on some of the water's colour, so they read
+and a shader on the graphics card waves the fins. The fish take on some of the water's colour, so they read
 as being underneath it.
 
 **`makeThumbnails()`** — the palette pictures are rendered once from the real models, so what you drag out looks
@@ -60,8 +60,9 @@ like what lands on the planet.
 
 **Panel and sound.** A [lil-gui](https://lil-gui.georgealways.com/) panel changes the noise scale, the flow
 speed, the size of the core, how sharply the tornadoes open up, the thickness of the ice, the colour of the fish
-and the volumes. Picking up an element plays a short clip cut from a longer recording: a clink of ice, a gust of
-wind, bubbling water. The button at the top left plays the background music.
+and the volumes. Picking up an element plays a short clip cut from a longer recording on
+[freesound.org](https://freesound.org/): a clink of ice, a gust of wind, bubbling water. The button at the top left
+plays the background music, a track from the *Outer Wilds* soundtrack by Andrew Prahlow.
 
 ## Interaction
 

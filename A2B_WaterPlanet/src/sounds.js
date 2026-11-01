@@ -1,15 +1,15 @@
 /**
  * Sound: background music, played and paused by the button at the top left, and a short sound effect when an
- * element is picked up from the palette. The effects are clips cut from the recordings in assets, saved in assets/sfx.
+ * element is picked up from the palette. The effects are short clips cut from longer recordings, saved in assets/sfx.
  */
 
-const MUSIC_FILE = "assets/background-music.mp3";
+const MUSIC_FILE = "assets/background-music.mp3"; // Played on a loop while the sound is on
 
 // One clip for each element type, played when it is picked up from the palette
 const SOUND_FILES = {
-    ice: "assets/sfx/ice.mp3", // A clink of ice, from ice.wav at 3.47 s
-    tornado: "assets/sfx/wind.mp3", // A short gust of wind, 1.5 s from wind.wav at 2:39.3
-    fish: "assets/sfx/fish.mp3", // Bubbling water, from fish.flac at 7.84 s, fading out slowly
+    ice: "assets/sfx/ice.mp3", // A clink of ice, 0.37 s
+    tornado: "assets/sfx/wind.mp3", // A short gust of wind, 1.5 s
+    fish: "assets/sfx/fish.mp3", // Bubbling water, fading out slowly, 1.76 s
 };
 
 let music;

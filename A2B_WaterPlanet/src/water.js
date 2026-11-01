@@ -1,6 +1,5 @@
 /**
- * The water planet and the core inside it. Both are balls of radius 1 that the water shader moves and colours on the
- * graphics card, every point and every pixel, after A2A-strands-prototype.js.
+ * The water planet and the core inside it.
  */
 
 // Planet
@@ -21,9 +20,9 @@ const CORE_DETAIL_X = 40; // Segments around the core, count
 const CORE_DETAIL_Y = 28; // Segments from pole to pole, count
 
 // Bumps and colours of both balls
-const BUMP_HEIGHT = 0.02; // How far the surface moves in and out, 0.021 = ±2.1% of the radius
+const BUMP_HEIGHT = 0.02; // How far the surface moves in and out, fraction of the radius, 0.02 = ±2%
 const BUMP_OCTAVES = 5; // Layers of noise in the bumps, few so the outline of the planet stays smooth
-const COLOR_OCTAVES = 9; // Layers of noise in the colour, more = finer detail, past 3 it looks like clouds
+const COLOR_OCTAVES = 9; // Layers of noise in the colour, count, more = finer detail
 const DEEP_NOISE = 0.2; // Noise at and below which the colour is the deep colour
 const CREST_NOISE = 1; // Noise at and above which the colour is the crest colour, higher = less foam
 const MIDDLE_LEVEL = 0.7; // Where the colour reaches the middle colour, 0 to 1, 0 = deepest dip, 1 = highest peak
@@ -87,10 +86,11 @@ function updateWater() {
 }
 
 /**
- * The water shader. A p5.strands shader: written in JavaScript, run on the graphics card for every point and every
- * pixel of a water ball of radius 1. The bumps move the points in and out, and the colour is worked out again for
- * every pixel, so it stays sharp up close instead of blurring between the points.
- * The function is turned into shader code once, so it reads the constants once and gets what changes as uniforms.
+ * The water shader, written with p5.strands: makeWater() hands this function to buildColorShader(), which turns it
+ * into shader code once. It then runs on the graphics card for every point and every pixel of a water ball of
+ * radius 1: each point moves in or out with noise that flows over time, and each pixel works out its colour from
+ * the same noise. Constants are read once, when the shader is built; what changes comes in as uniforms, set in
+ * drawWater().
  */
 function waterSurface() {
     const flowTime = uniformFloat(); // The flowTime above, set every frame in drawWater()

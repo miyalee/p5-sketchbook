@@ -76,7 +76,7 @@ function draw() {
         drawIceFloe(floe);
     }
 
-    // Near side of the planet, over everything inside, marking no depth so the fish below can be drawn behind it
+    // Near side of the planet over everything inside, marking no depth so the fish under it can still be drawn next
     drawWithoutDepth(() => {
         drawWater(planet, PLANET_RADIUS, "near");
     });
