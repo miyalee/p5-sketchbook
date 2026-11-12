@@ -8,7 +8,7 @@ const params = {
     finesse: 4, // How sharply the tornado funnel opens up towards the top, power
     iceThickness: 20, // Thickness of the ice, world units
     fishColor: "#ff8f05", // Body colour of the fish, orange yellow
-    musicVolume: 0.5, // 0 to 1
+    musicVolume: 0.1, // 0 to 1
     effectsVolume: 0.7, // 0 to 1
 
     // Read only, filled in by draw()

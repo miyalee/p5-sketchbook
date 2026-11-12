@@ -3,7 +3,7 @@
  * element is picked up from the palette. The effects are short clips cut from longer recordings, saved in assets/sfx.
  */
 
-const MUSIC_FILE = "assets/background-music.mp3"; // Played on a loop while the sound is on
+const MUSIC_FILE = "assets/background-music.mp3"; // "Giant's Deep" by Andrew Prahlow, from the Outer Wilds soundtrack
 
 // One clip for each element type, played when it is picked up from the palette
 const SOUND_FILES = {

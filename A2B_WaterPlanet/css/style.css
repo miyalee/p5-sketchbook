@@ -113,6 +113,18 @@ body.is-placing * {
     cursor: grabbing !important;
 }
 
+/* Where the music comes from, bottom right */
+#music-credit {
+    position: fixed;
+    z-index: 5;
+    right: 20px;
+    bottom: 20px;
+    margin: 0;
+    color: #8a9ba6;
+    font-size: 11px;
+    pointer-events: none;
+}
+
 /* Sound on and off, top left */
 .sound-button {
     position: fixed;
@@ -135,5 +147,10 @@ body.is-placing * {
 
     .lil-gui.lil-root {
         --width: 190px;
+    }
+
+    /* Above the hint, which takes the bottom on a narrow screen */
+    #music-credit {
+        bottom: 70px;
     }
 }

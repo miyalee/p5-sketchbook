@@ -62,7 +62,8 @@ like what lands on the planet.
 speed, the size of the core, how sharply the tornadoes open up, the thickness of the ice, the colour of the fish
 and the volumes. Picking up an element plays a short clip cut from a longer recording on
 [freesound.org](https://freesound.org/): a clink of ice, a gust of wind, bubbling water. The button at the top left
-plays the background music, a track from the *Outer Wilds* soundtrack by Andrew Prahlow.
+plays the background music, *Giant's Deep* by Andrew Prahlow from the *Outer Wilds* soundtrack, credited at the
+bottom right.
 
 ## Interaction
 
